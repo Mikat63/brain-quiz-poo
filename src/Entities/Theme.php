@@ -10,8 +10,8 @@ final class Theme
         return $this->theme;
     }
 
-    public function getId(): int
+    public function getId(): ?int
     {
-        return $this->?id;
+        return $this->id;
     }
 }
