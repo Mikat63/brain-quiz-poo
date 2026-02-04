@@ -27,7 +27,7 @@
                 "@type": "Person",
                 "name": "Mika"
             },
-            "image": "img/brain_q_logo.webp"
+            "image": "../assets/img/brain_q_logo.webp"
         }
     </script>
 
@@ -36,8 +36,8 @@
     <link rel="preload" href="../assets/fonts/Inter/static/Inter_18pt-Regular.woff2" as="font" type="font/woff2" crossorigin>
 
     <!-- CSS & JS links -->
-    <link rel="stylesheet" href="../assets/styles/style.css">
-    <script defer src="../assets/scripts/main.js"></script>
+    <link rel="stylesheet" href="assets/styles/style.css">
+    <script defer src="assets/scripts/main.js"></script>
     <title><?= "BRAIN QUIZ - $title" ?></title>
 
 

@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once "process/db_connect.php";
-require_once "utils/is_connected.php";
-require_once "utils/is_quiz_started.php";
+require_once "../process/db_connect.php";
+require_once "../utils/is_connected.php";
+require_once "../utils/is_quiz_started.php";
 
 
 // podium query
@@ -58,13 +58,13 @@ $title = "Accueil";
 $buttonLink = "choice_quiz.php";
 $ariaDescription = "Revenir aux quiz";
 $textButton = "Revenir aux quiz";
-require_once "partials/page_infos.php";
+require_once "./partials/page_infos.php";
 ?>
 
 
 <main class="min-h-svh flex flex-col items-center">
     <div>
-        <?php require_once "partials/logo.php" ?>
+        <?php require_once "./partials/logo.php" ?>
     </div>
 
     <!-- main container -->
@@ -82,21 +82,21 @@ require_once "partials/page_infos.php";
                     $player = isset($podiumPlayers[2]) ? $podiumPlayers[2]['user'] : 'Joueur';
                     $scorePlayer = isset($podiumPlayers[2]) ? $podiumPlayers[2]['user_score'] : 'score';
                     $heightPodium = "h-12";
-                    require "partials/podium.php";
+                    require "./partials/podium.php";
                     ?>
 
                     <?php
                     $player = isset($podiumPlayers[0]) ? $podiumPlayers[0]['user'] : 'Joueur';
                     $scorePlayer = isset($podiumPlayers[0]) ? $podiumPlayers[0]['user_score'] : 'Score';
                     $heightPodium = "h-20";
-                    require "partials/podium.php";
+                    require "./partials/podium.php";
                     ?>
 
                     <?php
                     $player = isset($podiumPlayers[1]) ? $podiumPlayers[1]['user'] : 'Joueur';
                     $scorePlayer = isset($podiumPlayers[1]) ? $podiumPlayers[1]['user_score'] : 'Score';
                     $heightPodium = "h-16";
-                    require "partials/podium.php";
+                    require "./partials/podium.php";
                     ?>
                 </div>
 
@@ -107,7 +107,7 @@ require_once "partials/page_infos.php";
                         $position = $key + 3 . "e";
                         $pseudo = isset($player['user']) ? $player['user'] : 'Joueur';
                         $score = isset($player['user_score']) ? $player['user_score'] : 'Score';
-                        require "partials/ranking.php";
+                        require "./partials/ranking.php";
                     }
                     ?>
                 </div>
@@ -115,12 +115,12 @@ require_once "partials/page_infos.php";
 
 
             <div>
-                <?php require_once "partials/start_button.php";  ?>
+                <?php require_once "./partials/start_button.php";  ?>
             </div>
         </div>
     </div>
 </main>
 
 <?php
-require_once "partials/footer.php";
+require_once "./partials/footer.php";
 ?>

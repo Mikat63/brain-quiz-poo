@@ -7,13 +7,13 @@ unset(
     $_SESSION['score']
 );
 
-require_once "utils/is_connected.php";
+require_once "../utils/is_connected.php";
 $title = "Choix du quiz";
 $backLink = "connexion.php";
 
-require_once "partials/page_infos.php";
-require_once "partials/header.php";
-require_once "process/db_connect.php";
+require_once "./partials/page_infos.php";
+require_once "./partials/header.php";
+require_once "../process/db_connect.php";
 
 
 $request = $db->query(
@@ -24,9 +24,13 @@ $request = $db->query(
 );
 
 $themes = $request->fetchAll();
+
+$themeObject = [];
+
+foreach ($themes as $theme) {
+    $themeObject[] = new Theme(theme: $theme['theme'], id: $theme['id']);
+}
 ?>
-
-
 
 <main class="min-h-svh flex flex-col items-center gap-8 justify-center overflow-hidden py-8">
     <!-- main container -->
@@ -38,72 +42,72 @@ $themes = $request->fetchAll();
             <!-- container with 3 quiz cards links -->
             <div class="w-full flex flex-col items-center gap-8 lg:flex-row">
                 <?php
-                $imgQuiz = "img/quiz_animals/quiz_animals_cover_1024.webp";
+                $imgQuiz = "./assets/img/quiz_animals/quiz_animals_cover_1024.webp";
                 $altMessage = "quiz sur les animaux";
                 $quizName = "Animaux";
-                $srcSet = "img/quiz_animals/quiz_animals_cover_600.webp 600w,img/quiz_animals/quiz_animals_cover_1024.webp 1024w ";
+                $srcSet = "./assets/img/quiz_animals/quiz_animals_cover_600.webp 600w,./assets/img/quiz_animals/quiz_animals_cover_1024.webp 1024w ";
                 $sizes = "(max-width: 600px) 600px, 1024px";
                 $themeId = "1";
 
-                require "partials/quiz_card.php";
+                require "./partials/quiz_card.php";
                 ?>
 
                 <?php
-                $imgQuiz = "img/quiz_cinema/quiz_cinema_cover_1024.webp";
+                $imgQuiz = "./assets/img/quiz_cinema/quiz_cinema_cover_1024.webp";
                 $altMessage = "quiz sur le cinéma";
                 $quizName = "Cinéma";
-                $srcSet = "img/quiz_cinema/quiz_cinema_cover_600.webp 600w,img/quiz_cinema/quiz_cinema_cover_1024.webp 1024w ";
+                $srcSet = "./assets/img/quiz_cinema/quiz_cinema_cover_600.webp 600w,./assets/img/quiz_cinema/quiz_cinema_cover_1024.webp 1024w ";
                 $sizes = "(max-width: 600px) 600px, 1024px";
                 $themeId = "2";
 
-                require "partials/quiz_card.php";
+                require "./partials/quiz_card.php";
                 ?>
 
                 <?php
-                $imgQuiz = "img/quiz_litterature/quiz_litterature_cover_1024.webp";
+                $imgQuiz = "./assets/img/quiz_litterature/quiz_litterature_cover_1024.webp";
                 $altMessage = "quiz sur la litterature";
                 $quizName = "Littérature";
-                $srcSet = "img/quiz_litterature/quiz_litterature_cover_600.webp 600w,img/quiz_litterature/quiz_litterature_cover_1024.webp 1024w ";
+                $srcSet = "./assets/img/quiz_litterature/quiz_litterature_cover_600.webp 600w,./assets/img/quiz_litterature/quiz_litterature_cover_1024.webp 1024w ";
                 $sizes = "(max-width: 600px) 600px, 1024px";
                 $themeId = "3";
 
-                require "partials/quiz_card.php";
+                require "./partials/quiz_card.php";
                 ?>
             </div>
 
             <!-- container with 3 quiz cards links -->
             <div class="w-full flex flex-col items-center gap-8 lg:flex-row">
                 <?php
-                $imgQuiz = "img/quiz_music/quiz_music_cover_1024.webp";
+                $imgQuiz = "./assets/img/quiz_music/quiz_music_cover_1024.webp";
                 $altMessage = "quiz sur la musique";
                 $quizName = "Musique";
-                $srcSet = "img/quiz_music/quiz_music_cover_600.webp 600w,img/quiz_music/quiz_music_cover_1024.webp 1024w ";
+                $srcSet = "./assets/img/quiz_music/quiz_music_cover_600.webp 600w,./assets/img/quiz_music/quiz_music_cover_1024.webp 1024w ";
                 $sizes = "(max-width: 600px) 600px, 1024px";
                 $themeId = "4";
 
-                require "partials/quiz_card.php";
+                require "./partials/quiz_card.php";
                 ?>
 
                 <?php
-                $imgQuiz = "img/quiz_science/quiz_science_cover_1024.webp";
+                $imgQuiz = "./assets/img/quiz_science/quiz_science_cover_1024.webp";
                 $altMessage = "quiz sur la science";
                 $quizName = "Science";
-                $srcSet = "img/quiz_science/quiz_science_cover_600.webp 600w,img/quiz_science/quiz_science_cover_1024.webp 1024w ";
+                $srcSet = "./assets/img/quiz_science/quiz_science_cover_600.webp 600w,./assets/img/quiz_science/quiz_science_cover_1024.webp 1024w ";
                 $sizes = "(max-width: 600px) 600px, 1024px";
                 $themeId = "5";
 
-                require "partials/quiz_card.php";
+                require "./partials/quiz_card.php";
                 ?>
 
                 <?php
-                $imgQuiz = "img/quiz_sport/quiz_sport_cover_1024.webp";
+                $imgQuiz = "./assets/img/quiz_sport/quiz_sport_cover_1024.webp";
                 $altMessage = "quiz sur le sport";
                 $quizName = "Sport";
-                $srcSet = "img/quiz_sport/quiz_sport_cover_600.webp 600w,img/quiz_sport/quiz_sport_cover_1024.webp 1024w ";
+                $srcSet = "./assets/img/quiz_sport/quiz_sport_cover_600.webp 600w,./assets/img/quiz_sport/quiz_sport_cover_1024.webp 1024w ";
                 $sizes = "(max-width: 600px) 600px, 1024px";
                 $themeId = "6";
 
-                require "partials/quiz_card.php";
+                require "./partials/quiz_card.php";
                 ?>
             </div>
         </div>

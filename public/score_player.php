@@ -1,11 +1,11 @@
 <?php
 session_start();
-require_once "utils/is_connected.php";
-require_once "utils/is_quiz_started.php";
+require_once "../utils/is_connected.php";
+require_once "../utils/is_quiz_started.php";
 
 $title = "Score";
-require_once "partials/page_infos.php";
-require_once "process/db_connect.php";
+require_once "./partials/page_infos.php";
+require_once "./process/db_connect.php";
 
 // query for the  best score
 $request = $db->prepare(
@@ -80,7 +80,7 @@ $userScore = $request->fetch();
 <main class="min-h-svh flex flex-col items-center justify-center">
     <!-- main container -->
     <div class="w-[80%] flex-1 flex flex-col items-center justify-between pb-8">
-        <?php require_once "partials/logo.php";  ?>
+        <?php require_once "./partials/logo.php";  ?>
 
         <div class="w-full h-auto flex flex-col gap-4 ">
             <div class=" w-full h-auto flex flex-col items-center">
@@ -100,18 +100,18 @@ $userScore = $request->fetch();
             $buttonLink = "ranking.php";
             $ariaDescription = "Voir le classement";
             $textButton = "Voir le classement";
-            require "partials/start_button.php";
+            require "./partials/start_button.php";
             ?>
 
             <?php
             $buttonLink = "choice_quiz.php";
             $ariaDescription = "Revenir au choix du quiz";
             $textButton = "Retour aux quiz";
-            require "partials/start_button.php"; ?>
+            require "./partials/start_button.php"; ?>
         </div>
     </div>
 </main>
 
 <?php
-require_once "partials/footer.php";
+require_once "./partials/footer.php";
 ?>

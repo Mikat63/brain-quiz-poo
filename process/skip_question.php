@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once __DIR__ . '/../utils/is_quiz_started.php';
-require_once __DIR__ . '/../utils/is_connected.php';
+require_once '../utils/is_quiz_started.php';
+require_once '../utils/is_connected.php';
 
 header('Content-Type: application/json; charset=utf-8');
 

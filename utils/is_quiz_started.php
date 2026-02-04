@@ -6,6 +6,6 @@ if (
     !isset($_SESSION['score']) || filter_var($_SESSION['score'], FILTER_VALIDATE_INT) === false
 ) {
     $basePath = (strpos($_SERVER['REQUEST_URI'], '/process/') !== false) ? '../' : './';
-    header('Location: ' . $basePath . 'choice_quiz.php');
+    header('Location: ' . $basePath . './choice_quiz.php');
     exit();
 }

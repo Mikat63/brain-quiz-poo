@@ -1,11 +1,11 @@
 <?php
 session_start();
-require_once __DIR__ . '/../utils/is_connected.php';
-require_once __DIR__ . '/../utils/is_quiz_started.php';
+require_once '../utils/is_connected.php';
+require_once '../utils/is_quiz_started.php';
 
 $title = "quiz";
 $backLink = "choice_quiz.php";
-require_once __DIR__ . '/partials/page_infos.php';
+require_once './partials/page_infos.php';
 ?>
 
 
@@ -46,7 +46,7 @@ require_once __DIR__ . '/partials/page_infos.php';
                     $answerText = $answer['answer'];
                     $dataAnswer = $answer['id'];
                     $dataQuestion = $_SESSION['questions'][$_SESSION['question_number']]['id'];
-                    require __DIR__ . '/partials/answer_button.php';
+                    require './partials/answer_button.php';
                 }
                 ?>
             </div>
@@ -54,5 +54,5 @@ require_once __DIR__ . '/partials/page_infos.php';
 </main>
 
 <?php
-require_once __DIR__ . '/partials/footer.php';
+require_once './partials/footer.php';
 ?>

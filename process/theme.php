@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . '/../utils/is_connected.php';
+require_once '../utils/is_connected.php';
 
 // control if exist and int format
 if (!isset($_GET['id'])) {
@@ -23,7 +23,7 @@ $themeId = (int)$_GET['id'];
 
 // db connect
 try {
-    require_once __DIR__ . '/db_connect.php';
+    require_once '../utils/db_connect.php';
 
     // theme request
     $request = $db->prepare(

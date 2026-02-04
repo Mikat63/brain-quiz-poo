@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once __DIR__ . '/../utils/is_quiz_started.php';
-require_once __DIR__ . '/../utils/is_connected.php';
+require_once '../utils/is_quiz_started.php';
+require_once '../utils/is_connected.php';
 
 // Permettre les requêtes depuis n'importe quelle origine (pour le développement local)
 header('Access-Control-Allow-Origin: *');

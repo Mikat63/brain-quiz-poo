@@ -28,10 +28,11 @@ if (strlen($_POST['input_pseudo']) < 3 || strlen($_POST['input_pseudo']) > 15) {
 }
 
 // clean input
-$player = strip_tags(htmlspecialchars($_POST['input_pseudo']));
+$player = $_POST['input_pseudo'];
+$userObject = new User(username: $player);
 
 // connexion and query for bdd
-require_once __DIR__ . '/db_connect.php';
+require_once '../utils/db_connect.php';
 
 $request = $db->prepare(
     "SELECT
@@ -42,14 +43,18 @@ $request = $db->prepare(
 );
 
 $request->execute([
-    ":player" => $player
+    ":player" => $userObject->getUsername()
 ]);
 
 $user = $request->fetch();
 
 if ($user) {
-    $_SESSION['user_id'] = $user['id'];
+    $userObject->setId($user['id']);
+
+    $_SESSION['user_id'] = $userObject->getId();
+
     header("location: ../public/choice_quiz.php");
+
     exit;
 } else {
     $request = $db->prepare(
@@ -58,10 +63,11 @@ if ($user) {
     );
 
     $request->execute([
-        ":input_pseudo" => $player
+        ":input_pseudo" => $userObject->getUsername()
     ]);
 
-    $_SESSION['user_id'] = $db->lastInsertId();
+    $userObject->setId(id: $db->lastInsertId());
+    $_SESSION['user_id'] = $userObject->getId();
 
     header("location: ../public/choice_quiz.php");
     exit;
