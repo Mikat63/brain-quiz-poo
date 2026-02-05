@@ -1,6 +1,8 @@
 <?php
+require_once '../utils/autoloader.php';
 session_start();
 require_once '../utils/is_connected.php';
+
 
 // control if exist and int format
 if (!isset($_GET['id'])) {
@@ -20,7 +22,6 @@ if (empty(trim($_GET['id']))) {
 
 
 $themeId = (int)$_GET['id'];
-
 // db connect
 try {
     require_once '../utils/db_connect.php';
@@ -33,14 +34,15 @@ try {
         'themeId' => $themeId
     ]);
 
-    $theme = $request->fetch();
+    $themeData = $request->fetch();
 
-    if (!$theme) {
+    if (!$themeData) {
         header("location: ../public/choice_quiz.php?error=unknown_theme");
         exit;
     }
 
-    $_SESSION['theme'] = $theme;
+
+    $theme = new Theme(theme: $themeData['themes'], imgSmallSrc: $themeData['img_small_src'], imgLargeSrc: $themeData['img_large_src'], id: $themeData['id']);
 
 
     // question and answers reqyest and put in session
@@ -54,10 +56,19 @@ try {
     );
 
     $request->execute([
-        'theme_quiz' => $_SESSION['theme']['id']
+        'theme_quiz' => $theme->getId()
     ]);
 
-    $_SESSION['questions'] = $request->fetchAll(PDO::FETCH_ASSOC);
+    $questionsDatas = $request->fetchAll(PDO::FETCH_ASSOC);
+
+
+    $questionObjects = [];
+
+    foreach ($questionsDatas as $questionData) {
+        $questionObjects[] = new Question(question: $questionData['question'], theme: $theme, imgSmallSrc: $questionData['img_path_mobile'], imgLargeSrc: $questionData['img_path_desktop'],  id: $questionData['id']);
+    }
+
+    $theme->setQuestions($questionObjects);
 
     // answers
     $request = $db->prepare(
@@ -70,21 +81,24 @@ try {
     );
 
 
-    foreach ($_SESSION['questions'] as $key => $question) {
+    foreach ($theme->getQuestions() as $key => $question) {
         $request->execute([
-            'question_id' => $question['id']
+            'question_id' => $question->getId()
         ]);
 
-        $answersByQuestion = $request->fetchAll(PDO::FETCH_ASSOC);
+        $answersDatasByQuestion = $request->fetchAll(PDO::FETCH_ASSOC);
+        $answers = [];
 
-        $_SESSION['questions'][$key]['answers'] = $answersByQuestion;
+        foreach ($answersDatasByQuestion as $answerData) {
+            $answers[] = new Answer(answer: $answerData['answer'], goodAnswer: $answerData['good_answer'], question: $theme->getQuestions()[$key],  id: $answerData['id']);
+        }
+
+        $theme->getQuestions()[$key]->setAnswers($answers);
     };
 
+    $_SESSION['theme'] =  $theme;
     $_SESSION['question_number'] = 0;
-
-
     $_SESSION['score'] = 0;
-
     header("Location: ../public/quiz_page.php");
     exit;
 } catch (PDOException $error) {

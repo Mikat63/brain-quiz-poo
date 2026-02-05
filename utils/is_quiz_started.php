@@ -1,7 +1,8 @@
 <?php
+require_once "autoloader.php";
 if (
-    !isset($_SESSION['theme']) || empty($_SESSION['theme']) ||
-    !isset($_SESSION['questions']) || empty($_SESSION['questions']) ||
+    !isset($_SESSION['theme']) || !is_object($_SESSION['theme']) || empty($_SESSION['theme']) ||
+    !isset($_SESSION['theme']) || !is_object($_SESSION['theme']) || empty($_SESSION['theme']) ||
     !isset($_SESSION['question_number']) || filter_var($_SESSION['question_number'], FILTER_VALIDATE_INT) === false ||
     !isset($_SESSION['score']) || filter_var($_SESSION['score'], FILTER_VALIDATE_INT) === false
 ) {

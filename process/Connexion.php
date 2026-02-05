@@ -1,5 +1,7 @@
 <?php
+require_once "../utils/autoloader.php";
 session_start();
+
 
 // control security input value
 if ($_SERVER['REQUEST_METHOD'] !== "POST") {
@@ -29,6 +31,7 @@ if (strlen($_POST['input_pseudo']) < 3 || strlen($_POST['input_pseudo']) > 15) {
 
 // clean input
 $player = $_POST['input_pseudo'];
+
 $userObject = new User(username: $player);
 
 // connexion and query for bdd
@@ -51,7 +54,7 @@ $user = $request->fetch();
 if ($user) {
     $userObject->setId($user['id']);
 
-    $_SESSION['user_id'] = $userObject->getId();
+    $_SESSION['user'] = $userObject;
 
     header("location: ../public/choice_quiz.php");
 
@@ -67,7 +70,7 @@ if ($user) {
     ]);
 
     $userObject->setId(id: $db->lastInsertId());
-    $_SESSION['user_id'] = $userObject->getId();
+    $_SESSION['user'] = $userObject;
 
     header("location: ../public/choice_quiz.php");
     exit;

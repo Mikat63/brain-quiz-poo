@@ -6,7 +6,7 @@ const answersBtn = document.querySelectorAll(".answer_btn");
 
 // fetch ajax function
 function http_request(questionId, answerId) {
-  fetch("process/next_question.php", {
+  fetch("/brain-quiz-poo/process/next_question.php", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -67,7 +67,7 @@ function showResulAnswer(data) {
         quizContainer.classList.add(
           "opacity-0",
           "transition-opacity",
-          "duration-4000"
+          "duration-4000",
         );
       }
       setTimeout(() => {
@@ -84,7 +84,7 @@ function showResulAnswer(data) {
       quizContainer.classList.add(
         "opacity-0",
         "transition-opacity",
-        "duration-4000"
+        "duration-4000",
       );
     }
     setTimeout(() => {
@@ -98,7 +98,7 @@ function showResulAnswer(data) {
       quizContainer.classList.remove(
         "opacity-0",
         "transition-opacity",
-        "duration-4000"
+        "duration-4000",
       );
 
       // stop and restart the timer
@@ -149,10 +149,10 @@ function timer(ts) {
       quizContainer.classList.add(
         "opacity-0",
         "transition-opacity",
-        "duration-4000"
+        "duration-4000",
       );
 
-      fetch("process/skip_question.php")
+      fetch("/brain-quiz-poo/process/next_question.php")
         .then((response) => response.json())
         .then((data) => showResulAnswer(data));
     }

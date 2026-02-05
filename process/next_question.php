@@ -1,4 +1,5 @@
 <?php
+require_once "../utils/autoloader.php";
 session_start();
 require_once '../utils/is_quiz_started.php';
 require_once '../utils/is_connected.php';
@@ -12,6 +13,7 @@ header('Content-Type: application/json; charset=utf-8');
 $json = file_get_contents('php://input');
 $data = json_decode($json, true);
 
+error_log(print_r($data, true));
 
 // control post values
 if ($_SERVER['REQUEST_METHOD'] !== "POST") {
@@ -38,7 +40,7 @@ $dataQuestion = (int)$data['questionId'];
 $dataAnswer = (int)$data['answerId'];
 
 // control to verify current_question and his answer
-if ((int)$_SESSION['questions'][$_SESSION['question_number']]['id'] !== $dataQuestion) {
+if ((int)$_SESSION['theme']->getQuestions()[$_SESSION['question_number']]->getId() !== $dataQuestion) {
     echo json_encode(['error' => 'wrong question']);
     exit;
 }
@@ -47,13 +49,13 @@ $is_correct = null;
 $goodAnswerId = null;
 
 // find the good answer
-foreach ($_SESSION['questions'][$_SESSION['question_number']]['answers'] as $answer) {
-    if ((int)$answer['good_answer'] === 1) {
-        $goodAnswerId = $answer['id'];
+foreach ($_SESSION['theme']->getQuestions()[$_SESSION['question_number']]->getAnswers() as $answer) {
+    if ((int)$answer->getGoodAnswer() === 1) {
+        $goodAnswerId = $answer->getId();
     }
 
-    if ((int)$answer['id'] === $dataAnswer) {
-        $is_correct = ((int)$answer['good_answer'] === 1);
+    if ((int)$answer->getId() === $dataAnswer) {
+        $is_correct = ((int)$answer->getGoodAnswer() === 1);
         if ($is_correct) {
             $_SESSION['score'] += 10;
         }
@@ -69,18 +71,23 @@ if ($is_correct === null) {
 
 $_SESSION['question_number']++;
 
-$isFinished = $_SESSION['question_number'] >= count($_SESSION['questions']);
+$isFinished = $_SESSION['question_number'] >= count($_SESSION['theme']->getQuestions());
 
 echo json_encode([
     'is_correct' => $is_correct,
     'id_answer' => $goodAnswerId,
     'clicked_answer' => $dataAnswer,
     'status' => $isFinished ? 'finished' : 'next',
-    'next_question' => $_SESSION['question_number'] + 1 . '/' . count($_SESSION['questions']),
-    'id_question' => $isFinished ? null : $_SESSION['questions'][$_SESSION['question_number']]['id'],
-    'question' => $isFinished ? null : $_SESSION['questions'][$_SESSION['question_number']]['question'],
-    'img_mobile' => $isFinished ? null : $_SESSION['questions'][$_SESSION['question_number']]['img_path_mobile'],
-    'img_desktop' => $isFinished ? null : $_SESSION['questions'][$_SESSION['question_number']]['img_path_desktop'],
-    'answers' => $isFinished ? null : $_SESSION['questions'][$_SESSION['question_number']]['answers']
+    'next_question' => $_SESSION['question_number'] + 1 . '/' . count($_SESSION['theme']->getQuestions()),
+    'id_question' => $isFinished ? null : $_SESSION['theme']->getQuestions()[$_SESSION['question_number']]->getId(),
+    'question' => $isFinished ? null : $_SESSION['theme']->getQuestions()[$_SESSION['question_number']]->getQuestion(),
+    'img_mobile' => $isFinished ? null : $_SESSION['theme']->getQuestions()[$_SESSION['question_number']]->getImgSmallSrc(),
+    'img_desktop' => $isFinished ? null : $_SESSION['theme']->getQuestions()[$_SESSION['question_number']]->getImgLargeSrc(),
+    'answers' => $isFinished ? null : array_map(function ($answer) {
+        return [
+            'id' => $answer->getId(),
+            'answer' => $answer->getAnswer()
+        ];
+    }, $_SESSION['theme']->getQuestions()[$_SESSION['question_number']]->getAnswers())
 ]);
 exit;
