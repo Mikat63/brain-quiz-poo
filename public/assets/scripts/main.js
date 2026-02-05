@@ -23,6 +23,12 @@ function http_request(questionId, answerId) {
 // listening answer click
 answersBtn.forEach((answer) => {
   answer.addEventListener("click", () => {
+    // Désactive tous les boutons dès le premier clic
+    document.querySelectorAll(".answer_btn").forEach((btn) => {
+      btn.disabled = true;
+      btn.classList.add("opacity-50", "cursor-not-allowed");
+    });
+
     const answerId = answer.dataset.answer;
     const questionId = answer.dataset.question;
 
@@ -111,6 +117,11 @@ function showResulAnswer(data) {
         btn.dataset.question = data.id_question;
         btn.textContent = ans.answer;
         btn.addEventListener("click", () => {
+          // Désactive tous les boutons dès le premier clic
+          document.querySelectorAll(".answer_btn").forEach((b) => {
+            b.disabled = true;
+            b.classList.add("opacity-50", "cursor-not-allowed");
+          });
           btn.blur();
           http_request(data.id_question, ans.id);
         });

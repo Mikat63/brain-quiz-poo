@@ -1,11 +1,12 @@
 <?php
+require_once "../utils/autoloader.php";
 session_start();
 require_once "../utils/is_connected.php";
 require_once "../utils/is_quiz_started.php";
 
 $title = "Score";
 require_once "./partials/page_infos.php";
-require_once "./process/db_connect.php";
+require_once "../utils/db_connect.php";
 
 // query for the  best score
 $request = $db->prepare(
@@ -18,8 +19,8 @@ $request = $db->prepare(
 );
 
 $request->execute([
-    'player_id' => $_SESSION['user_id'],
-    'theme_id' => $_SESSION['theme']['id']
+    'player_id' => $_SESSION['user']->getId(),
+    'theme_id' => $_SESSION['theme']->getId()
 ]);
 
 $userScore = $request->fetch();
@@ -37,8 +38,8 @@ if (!$userScore) {
     );
 
     $request->execute([
-        'user_id' => $_SESSION['user_id'],
-        'theme_id' => $_SESSION['theme']['id'],
+        'user_id' => $_SESSION['user']->getId(),
+        'theme_id' => $_SESSION['theme']->getId(),
         'score_user' => $_SESSION['score']
     ]);
 } elseif ($_SESSION['score'] > $userScore['user_score']) {
@@ -53,15 +54,15 @@ if (!$userScore) {
 
     $request->execute([
         'score' => $_SESSION['score'],
-        'player_id' => $_SESSION['user_id'],
-        'theme_id' => $_SESSION['theme']['id']
+        'player_id' => $_SESSION['user']->getId(),
+        'theme_id' => $_SESSION['theme']->getId()
     ]);
 }
 
 // Re-fetch the score query for best score 
 $request = $db->prepare(
     'SELECT 
-        user_score
+        *
     FROM
         users_themes
     WHERE 
@@ -69,11 +70,13 @@ $request = $db->prepare(
 );
 
 $request->execute([
-    'player_id' => $_SESSION['user_id'],
-    'theme_id' => $_SESSION['theme']['id']
+    'player_id' => $_SESSION['user']->getId(),
+    'theme_id' => $_SESSION['theme']->getId()
 ]);
 
-$userScore = $request->fetch();
+$score = $request->fetch();
+
+$userScore = new UserTheme($score['id_user'], $score['id_theme'], $score['user_score'], $score['id']);
 ?>
 
 
@@ -85,7 +88,7 @@ $userScore = $request->fetch();
         <div class="w-full h-auto flex flex-col gap-4 ">
             <div class=" w-full h-auto flex flex-col items-center">
                 <h2 class="font-[Manrope] text-[24px] font-bold text-white">MEILLEUR SCORE</h2>
-                <p class="font-[Manrope] text-[20px] font-semibold text-yellow-400"><?= $userScore['user_score'] ?></p>
+                <p class="font-[Manrope] text-[20px] font-semibold text-yellow-400"><?= $userScore->getScore() ?></p>
             </div>
 
             <div class=" w-full h-auto flex flex-col items-center">

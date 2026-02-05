@@ -1,4 +1,6 @@
 <?php
+require_once "../process/autoloader.php";
+
 session_start();
 require_once "../process/db_connect.php";
 require_once "../utils/is_connected.php";
