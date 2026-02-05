@@ -1,4 +1,5 @@
 <?php
+require_once '../utils/autoloader.php';
 session_start();
 require_once '../utils/is_quiz_started.php';
 require_once '../utils/is_connected.php';

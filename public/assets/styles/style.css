@@ -555,6 +555,13 @@
       }
     }
   }
+  .hover\:bg-\[\#1E8717\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #1E8717;
+      }
+    }
+  }
   .hover\:from-blue-800 {
     &:hover {
       @media (hover: hover) {
@@ -609,6 +616,11 @@
       --tw-scale-y: 150%;
       --tw-scale-z: 150%;
       scale: var(--tw-scale-x) var(--tw-scale-y);
+    }
+  }
+  .focus\:bg-\[\#1E8717\] {
+    &:focus {
+      background-color: #1E8717;
     }
   }
   .focus\:bg-gray-200 {

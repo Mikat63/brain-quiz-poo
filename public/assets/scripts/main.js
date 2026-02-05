@@ -38,21 +38,20 @@ function showResulAnswer(data) {
   const clickedAnswerId = data.clicked_answer;
   const isSkip = clickedAnswerId === null; // skip_question: pas de réponse cliquée
 
+  // Color feedback
   if (!isSkip) {
-    answersBtn.forEach((answer) => {
+    document.querySelectorAll(".answer_btn").forEach((answer) => {
       if (data.is_correct) {
         if (parseInt(answer.dataset.answer) === parseInt(goodAnswerId)) {
           answer.classList.remove("bg-[#0879C9]");
           answer.classList.add("bg-[#1E8717]");
         }
       }
-
       if (!data.is_correct) {
         if (parseInt(answer.dataset.answer) === parseInt(goodAnswerId)) {
           answer.classList.remove("bg-[#0879C9]");
           answer.classList.add("bg-[#1E8717]");
         }
-
         if (parseInt(answer.dataset.answer) === parseInt(clickedAnswerId)) {
           answer.classList.remove("bg-[#0879C9]");
           answer.classList.add("bg-[#C91D1D]");
@@ -88,27 +87,12 @@ function showResulAnswer(data) {
       );
     }
     setTimeout(() => {
-      // delete color btn befor new question
-      answersBtn.forEach((answer) => {
-        answer.classList.remove("bg-[#1E8717]");
-        answer.classList.remove("bg-[#C91D1D]");
-        answer.classList.add("bg-[#0879C9]");
-      });
-
+      // Mise à jour du DOM pour la nouvelle question
       quizContainer.classList.remove(
         "opacity-0",
         "transition-opacity",
         "duration-4000",
       );
-
-      // stop and restart the timer
-      timerRunning = false;
-      start = null;
-      bar.style.width = "100%";
-      requestAnimationFrame(() => {
-        timerRunning = true;
-        requestAnimationFrame(timer);
-      });
 
       counterQuestion.textContent = data.next_question;
       imgQuestion.src = data.img_desktop;
@@ -116,10 +100,30 @@ function showResulAnswer(data) {
       imgQuestion.sizes = "(max-width: 600px) 600px, 1024px";
       question.textContent = data.question;
 
-      answersBtn.forEach((answerBtn, index) => {
-        answerBtn.dataset.question = data.id_question;
-        answerBtn.dataset.answer = data.answers[index].id;
-        answerBtn.textContent = data.answers[index].answer;
+      // Remplace le container des réponses par les nouveaux boutons
+      const answerContainer = document.getElementById("answer_container");
+      answerContainer.innerHTML = "";
+      data.answers.forEach((ans) => {
+        const btn = document.createElement("button");
+        btn.className =
+          "answer_btn w-full p-2 bg-[#0879C9] text-white rounded-md font-[Inter] text-base cursor-pointer transition duration-300 hover:bg-[#1E8717] focus:bg-[#1E8717]";
+        btn.dataset.answer = ans.id;
+        btn.dataset.question = data.id_question;
+        btn.textContent = ans.answer;
+        btn.addEventListener("click", () => {
+          btn.blur();
+          http_request(data.id_question, ans.id);
+        });
+        answerContainer.appendChild(btn);
+      });
+
+      // Timer reset
+      timerRunning = false;
+      start = null;
+      bar.style.width = "100%";
+      requestAnimationFrame(() => {
+        timerRunning = true;
+        requestAnimationFrame(timer);
       });
     }, 2000);
   }, feedbackDelay);
@@ -152,7 +156,7 @@ function timer(ts) {
         "duration-4000",
       );
 
-      fetch("/brain-quiz-poo/process/next_question.php")
+      fetch("/brain-quiz-poo/process/skip_question.php")
         .then((response) => response.json())
         .then((data) => showResulAnswer(data));
     }
