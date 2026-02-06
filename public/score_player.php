@@ -76,7 +76,7 @@ $request->execute([
 
 $score = $request->fetch();
 
-$userScore = new UserTheme($score['id_user'], $score['id_theme'], $score['user_score'], $score['id']);
+$userScore = new UserTheme($_SESSION['user'], $_SESSION['theme'], $score['user_score'], $score['id']);
 ?>
 
 
