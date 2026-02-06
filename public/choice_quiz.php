@@ -3,9 +3,10 @@ require_once "../utils/autoloader.php";
 session_start();
 unset(
     $_SESSION['theme'],
-    $_SESSION['theme'],
+    $_SESSION['user_score'],
     $_SESSION['question_number'],
-    $_SESSION['score']
+    $_SESSION['score'],
+    $_SESSION['user-theme'],
 );
 
 require_once "../utils/is_connected.php";

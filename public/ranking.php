@@ -1,6 +1,8 @@
 <?php
+require_once "../utils/autoloader.php";
+
 session_start();
-require_once "../process/db_connect.php";
+require_once "../utils/db_connect.php";
 require_once "../utils/is_connected.php";
 require_once "../utils/is_quiz_started.php";
 
@@ -23,12 +25,12 @@ $requestPodium = $db->prepare(
 );
 
 $requestPodium->execute([
-    'id_theme' => $_SESSION['theme']['id']
+    'id_theme' => $_SESSION['theme']->getId()
 ]);
 
 $podiumPlayers = $requestPodium->fetchAll();
 
-// players rth to 10th query
+// players 3th to 10th query
 
 $requestOthersPlayers = $db->prepare(
     'SELECT 
