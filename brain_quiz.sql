@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 30 déc. 2025 à 10:43
+-- Généré le : ven. 06 fév. 2026 à 07:17
 -- Version du serveur : 9.1.0
 -- Version de PHP : 8.3.14
 
@@ -305,66 +305,66 @@ CREATE TABLE IF NOT EXISTS `questions` (
 --
 
 INSERT INTO `questions` (`id`, `question`, `img_path_mobile`, `img_path_desktop`, `id_theme`) VALUES
-(1, 'Quel est cet animal ?', 'img\\quiz_animals\\question_1_tiger_600.webp', 'img\\quiz_animals\\question_1_tiger_1024.webp', 1),
-(2, 'À quelle espèce appartient cet oiseau ?', 'img\\quiz_animals\\question_2_flamingo_600.webp', 'img\\quiz_animals\\question_2_flamingo_1024.webp', 1),
-(3, 'Quel est ce mammifère marin ?', 'img\\quiz_animals\\question_3_dolphin_600.webp', 'img\\quiz_animals\\question_3_dolphin_1024.webp', 1),
-(4, 'Quel insecte est sur cette photo ?', 'img\\quiz_animals\\question_4_dragonfly_600.webp', 'img\\quiz_animals\\question_4_dragonfly_1024.webp', 1),
-(5, 'Quel est ce reptile ?', 'img\\quiz_animals\\question_5_chameleon_600.webp', 'img\\quiz_animals\\question_5_chameleon_1024.webp', 1),
-(6, 'Quel animal africain est représenté ici ?', 'img\\quiz_animals\\question_6_elephant_600.webp', 'img\\quiz_animals\\question_6_elephant_1024.webp', 1),
-(7, 'Quel est ce félin sauvage ?', 'img\\quiz_animals\\question_7_lynx_600.webp', 'img\\quiz_animals\\question_7_lynx_1024.webp', 1),
-(8, 'Quel animal polaire est sur cette image ?', 'img\\quiz_animals\\question_8_polar_bear_600.webp', 'img\\quiz_animals\\question_8_polar_bear_1024.webp', 1),
-(9, 'Quel est ce primate ?', 'img\\quiz_animals\\question_9_gorilla_600.webp', 'img\\quiz_animals\\question_9_gorilla_1024.webp', 1),
-(10, 'Quel animal nocturne est ici ?', 'img\\quiz_animals\\question_10_owl_600.webp', 'img\\quiz_animals\\question_10_owl_1024.webp', 1),
-(11, 'De quel film provient cette scène ?²', 'img\\quiz_cinema\\question_1_Matrix_600.webp', 'img\\quiz_cinema\\question_1_Matrix_1024.webp', 2),
-(12, 'Quel acteur apparaît sur cette photo ?', 'img\\quiz_cinema\\question_2_leonardo_dicaprio_600.webp', 'img\\quiz_cinema\\question_2_leonardo_dicaprio_1024.webp', 2),
-(13, 'Quel est le nom de ce personnage ?', 'img\\quiz_cinema\\question_3_indiana_joneswebp_600.webp', 'img\\quiz_cinema\\question_3_indiana_joneswebp_1024.webp', 2),
-(14, 'À quel film appartient cette affiche ?', 'img\\quiz_cinema\\question_4_Godfather_600.webp', 'img\\quiz_cinema\\question_4_Godfather_1024.webp', 2),
-(15, 'Quel film d’animation est illustré ici ?', 'img\\quiz_cinema\\question_5_lion_king_600.webp', 'img\\quiz_cinema\\question_5_lion_king_1024.webp', 2),
-(16, 'Quel réalisateur a tourné ce film ?', 'img\\quiz_cinema\\question_6_jurassic_park_600.webp', 'img\\quiz_cinema\\question_6_jurassic_park_1024.webp', 2),
-(17, 'Quel duo comique est sur cette image ?', 'img\\quiz_cinema\\question_7_Laurel-and-Hardy_600.webp', 'img\\quiz_cinema\\question_7_Laurel-and-Hardy_1024.webp', 2),
-(18, 'De quel film de science-fiction vient ce vaisseau ?', 'img\\quiz_cinema\\question_8_star_wars_600.webp', 'img\\quiz_cinema\\question_8_star_wars_1024.webp', 2),
-(19, 'Quel film français est représenté ici ?', 'img\\quiz_cinema\\question_9_les_visiteurs-_600.webp', 'img\\quiz_cinema\\question_9_les_visiteurs-_1024.webp', 2),
-(20, 'Quel objet culte de cinéma est sur cette photo ?', 'img\\quiz_cinema\\question_10_star_wars_saber_600.webp', 'img\\quiz_cinema\\question_10_star_wars_saber_1024.webp', 2),
-(21, 'Quel auteur a écrit ce livre ?', 'img\\quiz_litterature\\question_1_victor_hugo_600.webp', 'img\\quiz_litterature\\question_1_victor_hugo_1024.webp', 3),
-(22, 'De quel roman est tirée cette couverture ?', 'img\\quiz_litterature\\question_2_little_prince_600.webp', 'img\\quiz_litterature\\question_2_little_prince_1024.webp', 3),
-(23, 'Quel personnage est illustré ici ?', 'img\\quiz_litterature\\question_3_sherlock_holmes_600.webp', 'img\\quiz_litterature\\question_3_sherlock_holmes_1024.webp', 3),
-(24, 'Quel poème est associé à cette image ?', 'img\\quiz_litterature\\question_4_le_dormeur_du_val_600.webp', 'img\\quiz_litterature\\question_4_le_dormeur_du_val_1024.webp', 3),
-(25, 'Quel prix littéraire a reçu ce livre ?', 'img\\quiz_litterature\\question_5_les_mandarins_600.webp', 'img\\quiz_litterature\\question_5_les_mandarins_1024.webp', 3),
-(26, 'Quel écrivain est sur cette photo ?', 'img\\quiz_litterature\\question_6_Simone_de_Beauvoir_600.webp', 'img\\quiz_litterature\\question_6_Simone_de_Beauvoir_1024.webp', 3),
-(27, 'Quel genre littéraire correspond à cette illustration ?', 'img\\quiz_litterature\\question_7_dune_600.webp', 'img\\quiz_litterature\\question_7_dune_1024.webp', 3),
-(28, 'Quel livre jeunesse est représenté ici ?', 'img\\quiz_litterature\\question_8_le_petit_nicolas_600.webp', 'img\\quiz_litterature\\question_8_le_petit_nicolas_1024.webp', 3),
-(29, 'Quel recueil de nouvelles est illustré ?', 'img\\quiz_litterature\\question_9_les_fables_de_la_fontaine_600.webp', 'img\\quiz_litterature\\question_9_les_fables_de_la_fontaine_1024.webp', 3),
-(30, 'Quel symbole littéraire est sur cette image ?', 'img\\quiz_litterature\\question_10_plum_600.webp', 'img\\quiz_litterature\\question_10_plum_1024.webp', 3),
-(31, 'Quel instrument est sur cette photo ?', 'img\\quiz_music\\question_1_violin_600.webp', 'img\\quiz_music\\question_1_violin_1024.webp', 4),
-(32, 'Quel artiste est représenté ici ?', 'img\\quiz_music\\question_2_freddie_mercury_600.webp', 'img\\quiz_music\\question_2_freddie_mercury_1024.webp', 4),
-(33, 'De quel album provient cette pochette ?', 'img\\quiz_music\\question_3_abbey_road_600.webp', 'img\\quiz_music\\question_3_abbey_road_1024.webp', 4),
-(34, 'Quel groupe est sur cette image ?', 'img\\quiz_music\\question_4_beatles_600.webp', 'img\\quiz_music\\question_4_beatles_1024.webp', 4),
-(35, 'Quel style musical est illustré ?', 'img\\quiz_music\\question_5_jazz_600.webp', 'img\\quiz_music\\question_5_jazz_1024.webp', 4),
-(36, 'Quel festival de musique est représenté ?', 'img\\quiz_music\\question_6_woodstock_600.webp', 'img\\quiz_music\\question_6_woodstock_1024.webp', 4),
-(37, 'Quel chanteur français est sur cette photo ?', 'img\\quiz_music\\question_7_johnny_hallyday_600.webp', 'img\\quiz_music\\question_7_johnny_hallyday_1024.webp', 4),
-(38, 'Quel instrument à vent est ici ?', 'img\\quiz_music\\question_8_flute_traversiere_600.webp', 'img\\quiz_music\\question_8_flute_traversiere_1024.webp', 4),
-(39, 'Quel clip musical est illustré ?', 'img\\quiz_music\\question_9_gangnam_style_600.webp', 'img\\quiz_music\\question_9_gangnam_style_1024.webp', 4),
-(40, 'Quel accessoire de scène est sur cette image ?', 'img\\quiz_music\\question_10_microphone_600.webp', 'img\\quiz_music\\question_10_microphone_1024.webp', 4),
-(41, 'Quel scientifique est sur cette photo ?', 'img\\quiz_science\\question_1_albert_einstein_600.webp', 'img\\quiz_science\\question_1_albert_einstein_1024.webp', 5),
-(42, 'Quel phénomène naturel est illustré ?', 'img\\quiz_science\\question_2_northern_lights_600.webp', 'img\\quiz_science\\question_2_northern_lights_1024.webp', 5),
-(43, 'Quel organe humain est sur cette image ?', 'img\\quiz_science\\question_3_heart_600.webp', 'img\\quiz_science\\question_3_heart_1024.webp', 5),
-(44, 'Quel animal fossile est représenté ?', 'img\\quiz_science\\question_4_tyranosaur_600.webp', 'img\\quiz_science\\question_4_tyranosaur_1024.webp', 5),
-(45, 'Quel objet astronomique est ici ?', 'img\\quiz_science\\question_5_galaxy_600.webp', 'img\\quiz_science\\question_5_galaxy_1024.webp', 5),
-(46, 'Quel appareil scientifique est sur cette photo ?', 'img\\quiz_science\\question_6_microscope_600.webp', 'img\\quiz_science\\question_6_microscope_1024.webp', 5),
-(47, 'Quel élément chimique est illustré ?', 'img\\quiz_science\\question_7_oxygen_600.webp', 'img\\quiz_science\\question_7_oxygen_1024.webp', 5),
-(48, 'Quel schéma représente une cellule végétale ?', 'img\\quiz_science\\question_8_plant_cell_600.webp', 'img\\quiz_science\\question_8_plant_cell_1024.webp', 5),
-(49, 'Quel inventeur est sur cette image ?', 'img\\quiz_science\\question_9_louis_pasteur_600.webp', 'img\\quiz_science\\question_9_louis_pasteur_1024.webp', 5),
-(50, 'Quel phénomène physique est illustré ?', 'img\\quiz_science\\question_10_refraction_600.webp', 'img\\quiz_science\\question_10_refraction_1024.webp', 5),
-(51, 'Quel sportif est sur cette photo ?', 'img\\quiz_sport\\question_1_usain_bolt_600.webp', 'img\\quiz_sport\\question_1_usain_bolt_1024.webp', 6),
-(52, 'Quel sport est pratiqué ici ?', 'img\\quiz_sport\\question_2_football_600.webp', 'img\\quiz_sport\\question_2_football_1024.webp', 6),
-(53, 'Quel stade célèbre est représenté ?', 'img\\quiz_sport\\question_3_Maracana__stadium_600.webp', 'img\\quiz_sport\\question_3_Maracana__stadium_1024.webp', 6),
-(54, 'Quel équipement sportif est sur cette image ?', 'img\\quiz_sport\\question_4_racket_600.webp', 'img\\quiz_sport\\question_4_racket_1024.webp', 6),
-(55, 'Quel geste technique est illustré ?', 'img\\quiz_sport\\question_5_smash_600.webp', 'img\\quiz_sport\\question_5_smash_1024.webp', 6),
-(56, 'Quel trophée est sur cette photo ?', 'img\\quiz_sport\\question_6_world_cup_600.webp', 'img\\quiz_sport\\question_6_world_cup_1024.webp', 6),
-(57, 'Quel sport nautique est pratiqué ici ?', 'img\\quiz_sport\\question_7_surf_600.webp', 'img\\quiz_sport\\question_7_surf_1024.webp', 6),
-(58, 'Quel athlète français est sur cette image ?', 'img\\quiz_sport\\question_8_teddy_riner_600.webp', 'img\\quiz_sport\\question_8_teddy_riner_1024.webp', 6),
-(59, 'Quel sport d’hiver est illustré ?', 'img\\quiz_sport\\question_9_alpine_skiing_600.webp', 'img\\quiz_sport\\question_9_alpine_skiing_1024.webp', 6),
-(60, 'Quel logo sportif est représenté ?', 'img\\quiz_sport\\question_10_olympics_games_600.webp', 'img\\quiz_sport\\question_10_olympics_games_1024.webp', 6);
+(1, 'Quel est cet animal ?', 'assets/img/quiz_animals/question_1_tiger_600.webp', 'assets/img/quiz_animals/question_1_tiger_1024.webp', 1),
+(2, 'À quelle espèce appartient cet oiseau ?', 'assets/img/quiz_animals/question_2_flamingo_600.webp', 'assets/img/quiz_animals/question_2_flamingo_1024.webp', 1),
+(3, 'Quel est ce mammifère marin ?', 'assets/img/quiz_animals/question_3_dolphin_600.webp', 'assets/img/quiz_animals/question_3_dolphin_1024.webp', 1),
+(4, 'Quel insecte est sur cette photo ?', 'assets/img/quiz_animals/question_4_dragonfly_600.webp', 'assets/img/quiz_animals/question_4_dragonfly_1024.webp', 1),
+(5, 'Quel est ce reptile ?', 'assets/img/quiz_animals/question_5_chameleon_600.webp', 'assets/img/quiz_animals/question_5_chameleon_1024.webp', 1),
+(6, 'Quel animal africain est représenté ici ?', 'assets/img/quiz_animals/question_6_elephant_600.webp', 'assets/img/quiz_animals/question_6_elephant_1024.webp', 1),
+(7, 'Quel est ce félin sauvage ?', 'assets/img/quiz_animals/question_7_lynx_600.webp', 'assets/img/quiz_animals/question_7_lynx_1024.webp', 1),
+(8, 'Quel animal polaire est sur cette image ?', 'assets/img/quiz_animals/question_8_polar_bear_600.webp', 'assets/img/quiz_animals/question_8_polar_bear_1024.webp', 1),
+(9, 'Quel est ce primate ?', 'assets/img/quiz_animals/question_9_gorilla_600.webp', 'assets/img/quiz_animals/question_9_gorilla_1024.webp', 1),
+(10, 'Quel animal nocturne est ici ?', 'assets/img/quiz_animals/question_10_owl_600.webp', 'assets/img/quiz_animals/question_10_owl_1024.webp', 1),
+(11, 'De quel film provient cette scène ?²', 'assets/img/quiz_cinema/question_1_Matrix_600.webp', 'assets/img/quiz_cinema/question_1_Matrix_1024.webp', 2),
+(12, 'Quel acteur apparaît sur cette photo ?', 'assets/img/quiz_cinema/question_2_leonardo_dicaprio_600.webp', 'assets/img/quiz_cinema/question_2_leonardo_dicaprio_1024.webp', 2),
+(13, 'Quel est le nom de ce personnage ?', 'assets/img/quiz_cinema/question_3_indiana_joneswebp_600.webp', 'assets/img/quiz_cinema/question_3_indiana_joneswebp_1024.webp', 2),
+(14, 'À quel film appartient cette affiche ?', 'assets/img/quiz_cinema/question_4_Godfather_600.webp', 'assets/img/quiz_cinema/question_4_Godfather_1024.webp', 2),
+(15, 'Quel film d’animation est illustré ici ?', 'assets/img/quiz_cinema/question_5_lion_king_600.webp', 'assets/img/quiz_cinema/question_5_lion_king_1024.webp', 2),
+(16, 'Quel réalisateur a tourné ce film ?', 'assets/img/quiz_cinema/question_6_jurassic_park_600.webp', 'assets/img/quiz_cinema/question_6_jurassic_park_1024.webp', 2),
+(17, 'Quel duo comique est sur cette image ?', 'assets/img/quiz_cinema/question_7_Laurel-and-Hardy_600.webp', 'assets/img/quiz_cinema/question_7_Laurel-and-Hardy_1024.webp', 2),
+(18, 'De quel film de science-fiction vient ce vaisseau ?', 'assets/img/quiz_cinema/question_8_star_wars_600.webp', 'assets/img/quiz_cinema/question_8_star_wars_1024.webp', 2),
+(19, 'Quel film français est représenté ici ?', 'assets/img/quiz_cinema/question_9_les_visiteurs-_600.webp', 'assets/img/quiz_cinema/question_9_les_visiteurs-_1024.webp', 2),
+(20, 'Quel objet culte de cinéma est sur cette photo ?', 'assets/img/quiz_cinema/question_10_star_wars_saber_600.webp', 'assets/img/quiz_cinema/question_10_star_wars_saber_1024.webp', 2),
+(21, 'Quel auteur a écrit ce livre ?', 'assets/img/quiz_litterature/question_1_victor_hugo_600.webp', 'assets/img/quiz_litterature/question_1_victor_hugo_1024.webp', 3),
+(22, 'De quel roman est tirée cette couverture ?', 'assets/img/quiz_litterature/question_2_little_prince_600.webp', 'assets/img/quiz_litterature/question_2_little_prince_1024.webp', 3),
+(23, 'Quel personnage est illustré ici ?', 'assets/img/quiz_litterature/question_3_sherlock_holmes_600.webp', 'assets/img/quiz_litterature/question_3_sherlock_holmes_1024.webp', 3),
+(24, 'Quel poème est associé à cette image ?', 'assets/img/quiz_litterature/question_4_le_dormeur_du_val_600.webp', 'assets/img/quiz_litterature/question_4_le_dormeur_du_val_1024.webp', 3),
+(25, 'Quel prix littéraire a reçu ce livre ?', 'assets/img/quiz_litterature/question_5_les_mandarins_600.webp', 'assets/img/quiz_litterature/question_5_les_mandarins_1024.webp', 3),
+(26, 'Quel écrivain est sur cette photo ?', 'assets/img/quiz_litterature/question_6_Simone_de_Beauvoir_600.webp', 'assets/img/quiz_litterature/question_6_Simone_de_Beauvoir_1024.webp', 3),
+(27, 'Quel genre littéraire correspond à cette illustration ?', 'assets/img/quiz_litterature/question_7_dune_600.webp', 'assets/img/quiz_litterature/question_7_dune_1024.webp', 3),
+(28, 'Quel livre jeunesse est représenté ici ?', 'assets/img/quiz_litterature/question_8_le_petit_nicolas_600.webp', 'assets/img/quiz_litterature/question_8_le_petit_nicolas_1024.webp', 3),
+(29, 'Quel recueil de nouvelles est illustré ?', 'assets/img/quiz_litterature/question_9_les_fables_de_la_fontaine_600.webp', 'assets/img/quiz_litterature/question_9_les_fables_de_la_fontaine_1024.webp', 3),
+(30, 'Quel symbole littéraire est sur cette image ?', 'assets/img/quiz_litterature/question_10_plum_600.webp', 'assets/img/quiz_litterature/question_10_plum_1024.webp', 3),
+(31, 'Quel instrument est sur cette photo ?', 'assets/img/quiz_music/question_1_violin_600.webp', 'assets/img/quiz_music/question_1_violin_1024.webp', 4),
+(32, 'Quel artiste est représenté ici ?', 'assets/img/quiz_music/question_2_freddie_mercury_600.webp', 'assets/img/quiz_music/question_2_freddie_mercury_1024.webp', 4),
+(33, 'De quel album provient cette pochette ?', 'assets/img/quiz_music/question_3_abbey_road_600.webp', 'assets/img/quiz_music/question_3_abbey_road_1024.webp', 4),
+(34, 'Quel groupe est sur cette image ?', 'assets/img/quiz_music/question_4_beatles_600.webp', 'assets/img/quiz_music/question_4_beatles_1024.webp', 4),
+(35, 'Quel style musical est illustré ?', 'assets/img/quiz_music/question_5_jazz_600.webp', 'assets/img/quiz_music/question_5_jazz_1024.webp', 4),
+(36, 'Quel festival de musique est représenté ?', 'assets/img/quiz_music/question_6_woodstock_600.webp', 'assets/img/quiz_music/question_6_woodstock_1024.webp', 4),
+(37, 'Quel chanteur français est sur cette photo ?', 'assets/img/quiz_music/question_7_johnny_hallyday_600.webp', 'assets/img/quiz_music/question_7_johnny_hallyday_1024.webp', 4),
+(38, 'Quel instrument à vent est ici ?', 'assets/img/quiz_music/question_8_flute_traversiere_600.webp', 'assets/img/quiz_music/question_8_flute_traversiere_1024.webp', 4),
+(39, 'Quel clip musical est illustré ?', 'assets/img/quiz_music/question_9_gangnam_style_600.webp', 'assets/img/quiz_music/question_9_gangnam_style_1024.webp', 4),
+(40, 'Quel accessoire de scène est sur cette image ?', 'assets/img/quiz_music/question_10_microphone_600.webp', 'assets/img/quiz_music/question_10_microphone_1024.webp', 4),
+(41, 'Quel scientifique est sur cette photo ?', 'assets/img/quiz_science/question_1_albert_einstein_600.webp', 'assets/img/quiz_science/question_1_albert_einstein_1024.webp', 5),
+(42, 'Quel phénomène naturel est illustré ?', 'assets/img/quiz_science/question_2_northern_lights_600.webp', 'assets/img/quiz_science/question_2_northern_lights_1024.webp', 5),
+(43, 'Quel organe humain est sur cette image ?', 'assets/img/quiz_science/question_3_heart_600.webp', 'assets/img/quiz_science/question_3_heart_1024.webp', 5),
+(44, 'Quel animal fossile est représenté ?', 'assets/img/quiz_science/question_4_tyranosaur_600.webp', 'assets/img/quiz_science/question_4_tyranosaur_1024.webp', 5),
+(45, 'Quel objet astronomique est ici ?', 'assets/img/quiz_science/question_5_galaxy_600.webp', 'assets/img/quiz_science/question_5_galaxy_1024.webp', 5),
+(46, 'Quel appareil scientifique est sur cette photo ?', 'assets/img/quiz_science/question_6_microscope_600.webp', 'assets/img/quiz_science/question_6_microscope_1024.webp', 5),
+(47, 'Quel élément chimique est illustré ?', 'assets/img/quiz_science/question_7_oxygen_600.webp', 'assets/img/quiz_science/question_7_oxygen_1024.webp', 5),
+(48, 'Quel schéma représente une cellule végétale ?', 'assets/img/quiz_science/question_8_plant_cell_600.webp', 'assets/img/quiz_science/question_8_plant_cell_1024.webp', 5),
+(49, 'Quel inventeur est sur cette image ?', 'assets/img/quiz_science/question_9_louis_pasteur_600.webp', 'assets/img/quiz_science/question_9_louis_pasteur_1024.webp', 5),
+(50, 'Quel phénomène physique est illustré ?', 'assets/img/quiz_science/question_10_refraction_600.webp', 'assets/img/quiz_science/question_10_refraction_1024.webp', 5),
+(51, 'Quel sportif est sur cette photo ?', 'assets/img/quiz_sport/question_1_usain_bolt_600.webp', 'assets/img/quiz_sport/question_1_usain_bolt_1024.webp', 6),
+(52, 'Quel sport est pratiqué ici ?', 'assets/img/quiz_sport/question_2_football_600.webp', 'assets/img/quiz_sport/question_2_football_1024.webp', 6),
+(53, 'Quel stade célèbre est représenté ?', 'assets/img/quiz_sport/question_3_Maracana__stadium_600.webp', 'assets/img/quiz_sport/question_3_Maracana__stadium_1024.webp', 6),
+(54, 'Quel équipement sportif est sur cette image ?', 'assets/img/quiz_sport/question_4_racket_600.webp', 'assets/img/quiz_sport/question_4_racket_1024.webp', 6),
+(55, 'Quel geste technique est illustré ?', 'assets/img/quiz_sport/question_5_smash_600.webp', 'assets/img/quiz_sport/question_5_smash_1024.webp', 6),
+(56, 'Quel trophée est sur cette photo ?', 'assets/img/quiz_sport/question_6_world_cup_600.webp', 'assets/img/quiz_sport/question_6_world_cup_1024.webp', 6),
+(57, 'Quel sport nautique est pratiqué ici ?', 'assets/img/quiz_sport/question_7_surf_600.webp', 'assets/img/quiz_sport/question_7_surf_1024.webp', 6),
+(58, 'Quel athlète français est sur cette image ?', 'assets/img/quiz_sport/question_8_teddy_riner_600.webp', 'assets/img/quiz_sport/question_8_teddy_riner_1024.webp', 6),
+(59, 'Quel sport d’hiver est illustré ?', 'assets/img/quiz_sport/question_9_alpine_skiing_600.webp', 'assets/img/quiz_sport/question_9_alpine_skiing_1024.webp', 6),
+(60, 'Quel logo sportif est représenté ?', 'assets/img/quiz_sport/question_10_olympics_games_600.webp', 'assets/img/quiz_sport/question_10_olympics_games_1024.webp', 6);
 
 -- --------------------------------------------------------
 
@@ -376,6 +376,8 @@ DROP TABLE IF EXISTS `themes`;
 CREATE TABLE IF NOT EXISTS `themes` (
   `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
   `themes` varchar(50) NOT NULL,
+  `img_small_src` varchar(255) NOT NULL,
+  `img_large_src` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `themes` (`themes`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -384,13 +386,13 @@ CREATE TABLE IF NOT EXISTS `themes` (
 -- Déchargement des données de la table `themes`
 --
 
-INSERT INTO `themes` (`id`, `themes`) VALUES
-(1, 'animaux'),
-(2, 'cinema'),
-(3, 'litterature'),
-(4, 'musique'),
-(5, 'science'),
-(6, 'sport');
+INSERT INTO `themes` (`id`, `themes`, `img_small_src`, `img_large_src`) VALUES
+(1, 'animaux', 'assets/img/quiz_animals/quiz_animals_cover_600.webp', 'assets/img/quiz_animals/quiz_animals_cover_1024.webp'),
+(2, 'cinema', 'assets/img/quiz_cinema/quiz_cinema_cover_600.webp', 'assets/img/quiz_cinema/quiz_cinema_cover_1024.webp'),
+(3, 'litterature', 'assets/img/quiz_litterature/quiz_litterature_cover_600.webp', 'assets/img/quiz_litterature/quiz_litterature_cover_1024.webp'),
+(4, 'musique', 'assets/img/quiz_music/quiz_music_cover_600.webp', 'assets/img/quiz_music/quiz_music_cover_1024.webp'),
+(5, 'science', 'assets/img/quiz_science/quiz_science_cover_600.webp', 'assets/img/quiz_science/quiz_science_cover_1024.webp'),
+(6, 'sport', 'assets/img/quiz_sport/quiz_sport_cover_600.webp', 'assets/img/quiz_sport/quiz_sport_cover_1024.webp');
 
 -- --------------------------------------------------------
 
@@ -428,7 +430,14 @@ CREATE TABLE IF NOT EXISTS `users_themes` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `theme_user` (`id_user`,`id_theme`) USING BTREE,
   KEY `fk_THEME_ID` (`id_theme`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `users_themes`
+--
+
+INSERT INTO `users_themes` (`id`, `id_user`, `id_theme`, `user_score`) VALUES
+(1, 1, 1, 20);
 
 --
 -- Contraintes pour les tables déchargées

@@ -112,7 +112,7 @@ function showResulAnswer(data) {
       data.answers.forEach((ans) => {
         const btn = document.createElement("button");
         btn.className =
-          "answer_btn w-full p-2 bg-[#0879C9] text-white rounded-md font-[Inter] text-base cursor-pointer transition duration-300 hover:bg-[#1E8717] focus:bg-[#1E8717]";
+          "answer_btn w-full p-2 bg-[#0879C9] text-white rounded-md font-[Inter] text-base cursor-pointer transition duration-300 focus:bg-[#1E8717]";
         btn.dataset.answer = ans.id;
         btn.dataset.question = data.id_question;
         btn.textContent = ans.answer;
