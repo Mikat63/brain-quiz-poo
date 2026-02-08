@@ -1,12 +1,14 @@
 <?php
 
-final Class UserMapper {
+final class UserMapper
+{
 
-    public function mapToObject( array $data): User 
+    public function mapToObject(array $data): User
     {
         return new User(
-            $data['id'],
-            $data['username']
-        ); 
+            $data['user'],
+            $data['id']
+
+        );
     }
 }
