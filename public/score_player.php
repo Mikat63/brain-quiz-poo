@@ -9,41 +9,18 @@ $title = "Score";
 require_once "./partials/page_infos.php";
 require_once "../utils/db_connect.php";
 
-// query for the  best score
-$request = $db->prepare(
-    'SELECT 
-                            user_score
-                        FROM
-                            users_themes
-                        WHERE 
-                            id_user = :player_id AND id_theme = :theme_id'
-);
+$userRepo = new UserThemeRepository($db, new UserThemeMapper);
 
-$request->execute([
-    'player_id' => $_SESSION['user']->getId(),
-    'theme_id' => $_SESSION['theme']->getId()
-]);
+$userScoreObject = $userRepo->findOneByIdAndTheme($_SESSION['user'], $_SESSION['theme']);
 
-$userScore = $request->fetch();
 
 // Save score: INSERT if new, UPDATE if better
-if (!$userScore) {
-    $request = $db->prepare(
-        'INSERT INTO 
-                users_themes(id_user,id_theme,user_score)
-         VALUES
-                (:user_id,
-                 :theme_id,
-                 :score_user
-                 )'
-    );
+if (!$userScoreObject) {
 
-    $request->execute([
-        'user_id' => $_SESSION['user']->getId(),
-        'theme_id' => $_SESSION['theme']->getId(),
-        'score_user' => $_SESSION['score']
-    ]);
-} elseif ($_SESSION['score'] > $userScore['user_score']) {
+    $insertUserScore = $userRepo->InsertScore($_SESSION['user'], $_SESSION['theme'], $_SESSION['score']);
+
+
+    } elseif ($_SESSION['score'] > $userScore['user_score']) {
     $request = $db->prepare(
         'UPDATE 
                 users_themes

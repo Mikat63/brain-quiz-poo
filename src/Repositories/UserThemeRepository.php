@@ -39,6 +39,35 @@ final class UserThemeRepository
         return $podiumPlayersObjectsArray;
     }
 
+    public function findOneByIdAndTheme(User $userObject, Theme $themeObject): ?UserTheme
+    {
+
+        $request = $this->db->prepare(
+            'SELECT 
+                            u.user,
+                            ut.user_score
+                        FROM
+                            users_themes AS ut
+                        JOIN users As u ON u.id = ut.id_user
+                        WHERE 
+                            ut.id_user = :player_id AND ut.id_theme = :theme_id'
+        );
+
+        $request->execute([
+            'player_id' => $userObject->getId(),
+            'theme_id' => $themeObject->getId()
+        ]);
+
+        $userScore = $request->fetch();
+
+        if ($userScore) {
+            return $this->mapper->mapToObject($userScore, $themeObject);
+        };
+
+        return null;
+    }
+
+
     public function FindFourthToTenthPlayersByTheme(Theme $themeObject): array
     {
 
@@ -75,5 +104,27 @@ final class UserThemeRepository
         }
 
         return $fourthToTenthPlayersObjectsArray;
+    }
+
+    public function InsertScore(User $user, Theme $theme, int $score): ?UserTheme
+    {
+        $request = $this->db->prepare(
+            'INSERT INTO 
+                users_themes(id_user,id_theme,user_score)
+         VALUES
+                (:user_id,
+                 :theme_id,
+                 :score_user
+                 )'
+        );
+
+        $request->execute([
+            'user_id' => $user->getId(),
+            'theme_id' => $theme->getId(),
+            'score_user' => $score
+        ]);
+
+
+        return $this->findOneByIdAndTheme($user, $theme);
     }
 }

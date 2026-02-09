@@ -2,16 +2,16 @@
 
 final class UserThemeMapper
 {
-    public function mapToObject($userThemeArray, $themeObject): UserTheme
+    public function mapToObject($array, $themeObject): UserTheme
     {
         $userObject = new User(
-            username: $userThemeArray['user'],
+            username: $array['user']
         );
 
         return new UserTheme(
             user: $userObject,
             theme: $themeObject,
-            score: $userThemeArray['user_score'],
+            score: $array['user_score'],
         );
     }
 }
