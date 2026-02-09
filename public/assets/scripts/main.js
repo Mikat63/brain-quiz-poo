@@ -4,13 +4,8 @@ const imgQuestion = document.querySelector("#img_question");
 const question = document.querySelector("#question");
 const answersBtn = document.querySelectorAll(".answer_btn");
 
-let questionLocked = false;
-
 // fetch ajax function
 function http_request(questionId, answerId) {
-  if (questionLocked) return;
-  questionLocked = true;
-  timerRunning = false; // stop timer
   fetch("/brain-quiz-poo/process/next_question.php", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -28,9 +23,6 @@ function http_request(questionId, answerId) {
 // listening answer click
 answersBtn.forEach((answer) => {
   answer.addEventListener("click", () => {
-    if (questionLocked) return;
-    questionLocked = true;
-    timerRunning = false; // stop timer
     const answerId = answer.dataset.answer;
     const questionId = answer.dataset.question;
 
@@ -125,8 +117,7 @@ function showResulAnswer(data) {
         answerContainer.appendChild(btn);
       });
 
-      // Remise à zéro du verrou pour la prochaine question
-      questionLocked = false;
+      // Timer reset
       timerRunning = false;
       start = null;
       bar.style.width = "100%";
