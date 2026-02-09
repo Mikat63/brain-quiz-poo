@@ -4,8 +4,13 @@ const imgQuestion = document.querySelector("#img_question");
 const question = document.querySelector("#question");
 const answersBtn = document.querySelectorAll(".answer_btn");
 
+let questionLocked = false;
+
 // fetch ajax function
 function http_request(questionId, answerId) {
+  if (questionLocked) return;
+  questionLocked = true;
+  timerRunning = false; // stop timer
   fetch("/brain-quiz-poo/process/next_question.php", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -23,6 +28,9 @@ function http_request(questionId, answerId) {
 // listening answer click
 answersBtn.forEach((answer) => {
   answer.addEventListener("click", () => {
+    if (questionLocked) return;
+    questionLocked = true;
+    timerRunning = false; // stop timer
     const answerId = answer.dataset.answer;
     const questionId = answer.dataset.question;
 
@@ -106,7 +114,7 @@ function showResulAnswer(data) {
       data.answers.forEach((ans) => {
         const btn = document.createElement("button");
         btn.className =
-          "answer_btn w-full p-2 bg-[#0879C9] text-white rounded-md font-[Inter] text-base cursor-pointer transition duration-300 hover:bg-[#1E8717] focus:bg-[#1E8717]";
+          "answer_btn w-full p-2 bg-[#0879C9] text-white rounded-md font-[Inter] text-base cursor-pointer transition duration-300";
         btn.dataset.answer = ans.id;
         btn.dataset.question = data.id_question;
         btn.textContent = ans.answer;
@@ -117,7 +125,8 @@ function showResulAnswer(data) {
         answerContainer.appendChild(btn);
       });
 
-      // Timer reset
+      // Remise à zéro du verrou pour la prochaine question
+      questionLocked = false;
       timerRunning = false;
       start = null;
       bar.style.width = "100%";

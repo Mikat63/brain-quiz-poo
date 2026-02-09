@@ -6,7 +6,7 @@ final class UserRepository
 
     public function __construct(private PDO $db, private UserMapper $mapper) {}
 
-    public function findOneByUsername(string $user): ?User
+    public function findOneByUsername(string $userName): ?User
     {
 
         $request = $this->db->prepare(
@@ -18,7 +18,7 @@ final class UserRepository
         );
 
         $request->execute([
-            ":player" => $user
+            ":player" => $userName
         ]);
 
         $userData = $request->fetch(PDO::FETCH_ASSOC);
@@ -30,24 +30,16 @@ final class UserRepository
         return null;
     }
 
-    public function insertOne(string $data): ?User
+    public function insertOne(User $user): User
     {
         $request = $this->db->prepare(
             "INSERT INTO users (user)
              VALUES (:input_pseudo)"
         );
 
-        $request->execute([
-            ":input_pseudo" => $data
-        ]);
+        $request->execute($this->mapper->mapToArray($user));
 
-        $id =  $this->db->lastInsertId();
 
-        $userData = [
-            'username' => $data,
-            'id' => $id
-        ];
-
-        return $this->mapper->mapToObject($userData);
+        return $this->findOneByUsername($user->getUsername());
     }
 }

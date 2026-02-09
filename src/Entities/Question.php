@@ -18,6 +18,7 @@ final class Question
     public function setAnswers(array $answers): self
     {
         $this->answers = $answers;
+
         return $this;
     }
 

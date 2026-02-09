@@ -33,15 +33,15 @@ $themeRepository = new ThemeRepository($db, new ThemeMapper);
             <?php
             // load all themes
 
-            $themesDatas = $themeRepository->findAll();
+            $themes = $themeRepository->findAll();
 
-            foreach ($themesDatas as $themeData) {
-                $imgQuiz = $themeData->getImgSmallSrc();
-                $altMessage = "quiz sur les " . $themeData->getTheme();
-                $quizName = $themeData->getTheme();
-                $srcSet = $themeData->getImgSmallSrc() .  " 600w, " . $themeData->getImgLargeSrc() . " 1024w";
+            foreach ($themes as $theme) {
+                $imgQuiz = $theme->getImgSmallSrc();
+                $altMessage = "quiz sur les " . $theme->getTheme();
+                $quizName = $theme->getTheme();
+                $srcSet = $theme->getImgSmallSrc() .  " 600w, " . $theme->getImgLargeSrc() . " 1024w";
                 $sizes = "(max-width: 600px) 600px, 1024px";
-                $themeId = $themeData->getId();
+                $themeId = $theme->getId();
                 require "./partials/quiz_card.php";
             }
             ?>

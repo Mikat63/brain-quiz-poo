@@ -22,71 +22,40 @@ if (empty(trim($_GET['id']))) {
 
 
 $themeId = (int)$_GET['id'];
-// db connect
+
+
 try {
     require_once '../utils/db_connect.php';
-    $themeRepository =  new ThemeRepository ($db, new ThemeMapper);
 
-    $theme = $themeRepository->findOneById($themeId);
+    // theme object 
+    $themeRepository =  new ThemeRepository($db, new ThemeMapper);
+    $themeObject = $themeRepository->findOneById($themeId);
 
-    if (!$theme) {
+    if (!$themeObject) {
         header("location: ../public/choice_quiz.php?error=unknown_theme");
         exit;
     }
 
-
     // question and answers reqyest and put in session
     // questions
-    $request = $db->prepare(
-        'SELECT 
-                          *
-                         FROM
-                            questions 
-                        WHERE id_theme = :theme_quiz'
-    );
 
-    $request->execute([
-        'theme_quiz' => $theme->getId()
-    ]);
+    $questionRepo = new QuestionRepository($db, new QuestionMapper);
+    $questionObjects = $questionRepo->findAllByTheme($themeObject);
+    $themeObject->setQuestions($questionObjects);
 
-    $questionsDatas = $request->fetchAll(PDO::FETCH_ASSOC);
-
-
-    $questionObjects = [];
-
-    foreach ($questionsDatas as $questionData) {
-        $questionObjects[] = new Question(question: $questionData['question'], theme: $theme, imgSmallSrc: $questionData['img_path_mobile'], imgLargeSrc: $questionData['img_path_desktop'],  id: $questionData['id']);
-    }
-
-    $theme->setQuestions($questionObjects);
 
     // answers
-    $request = $db->prepare(
-        'SELECT
-                                * 
-                            FROM 
-                                answers 
-                            WHERE
-                                id_question = :question_id'
-    );
+
+    $answerRepo = new AnswerRepository($db, new AnswerMapper);
+
+    /** @var Question $questionObject */
+    foreach ($questionObjects as $questionObject) {
+        $answers = $answerRepo->findAllByQuestion($questionObject);
+        $questionObject->setAnswers($answers);
+    }
 
 
-    foreach ($theme->getQuestions() as $key => $question) {
-        $request->execute([
-            'question_id' => $question->getId()
-        ]);
-
-        $answersDatasByQuestion = $request->fetchAll(PDO::FETCH_ASSOC);
-        $answers = [];
-
-        foreach ($answersDatasByQuestion as $answerData) {
-            $answers[] = new Answer(answer: $answerData['answer'], goodAnswer: $answerData['good_answer'], question: $theme->getQuestions()[$key],  id: $answerData['id']);
-        }
-
-        $theme->getQuestions()[$key]->setAnswers($answers);
-    };
-
-    $_SESSION['theme'] =  $theme;
+    $_SESSION['theme'] =  $themeObject;
     $_SESSION['question_number'] = 0;
     $_SESSION['score'] = 0;
     header("Location: ../public/quiz_page.php");

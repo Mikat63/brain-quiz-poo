@@ -49,8 +49,8 @@ if ($user) {
 
     exit;
 } else {
-
-    $user = $userRepo->insertOne($player);
+    $user = new User($player);
+    $user = $userRepo->insertOne($user);
 
 
     $_SESSION['user'] = $user;

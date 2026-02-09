@@ -11,4 +11,11 @@ final class UserMapper
 
         );
     }
+
+    public function mapToArray(User $user): array
+    {
+        return  [
+            ":input_pseudo" => $user->getUsername()
+        ];
+    }
 }
