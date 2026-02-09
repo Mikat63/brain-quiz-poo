@@ -1,11 +1,13 @@
 <?php
+require_once "../utils/autoloader.php";
+
 session_start();
 require_once "../utils/is_connected.php";
 require_once "../utils/is_quiz_started.php";
 
 $title = "Score";
 require_once "./partials/page_infos.php";
-require_once "./process/db_connect.php";
+require_once "../utils/db_connect.php";
 
 // query for the  best score
 $request = $db->prepare(
@@ -18,8 +20,8 @@ $request = $db->prepare(
 );
 
 $request->execute([
-    'player_id' => $_SESSION['user_id'],
-    'theme_id' => $_SESSION['theme']['id']
+    'player_id' => $_SESSION['user']->getId(),
+    'theme_id' => $_SESSION['theme']->getId()
 ]);
 
 $userScore = $request->fetch();
@@ -37,8 +39,8 @@ if (!$userScore) {
     );
 
     $request->execute([
-        'user_id' => $_SESSION['user_id'],
-        'theme_id' => $_SESSION['theme']['id'],
+        'user_id' => $_SESSION['user']->getId(),
+        'theme_id' => $_SESSION['theme']->getId(),
         'score_user' => $_SESSION['score']
     ]);
 } elseif ($_SESSION['score'] > $userScore['user_score']) {
@@ -53,8 +55,8 @@ if (!$userScore) {
 
     $request->execute([
         'score' => $_SESSION['score'],
-        'player_id' => $_SESSION['user_id'],
-        'theme_id' => $_SESSION['theme']['id']
+        'player_id' => $_SESSION['user']->getId(),
+        'theme_id' => $_SESSION['theme']->getId()
     ]);
 }
 
@@ -69,11 +71,14 @@ $request = $db->prepare(
 );
 
 $request->execute([
-    'player_id' => $_SESSION['user_id'],
-    'theme_id' => $_SESSION['theme']['id']
+    'player_id' => $_SESSION['user']->getId(),
+    'theme_id' => $_SESSION['theme']->getId()
 ]);
 
 $userScore = $request->fetch();
+
+$userObject = new UserTheme(user: $_SESSION['user'], theme: $_SESSION['theme'], score: $userScore['user_score']);
+
 ?>
 
 
@@ -85,7 +90,7 @@ $userScore = $request->fetch();
         <div class="w-full h-auto flex flex-col gap-4 ">
             <div class=" w-full h-auto flex flex-col items-center">
                 <h2 class="font-[Manrope] text-[24px] font-bold text-white">MEILLEUR SCORE</h2>
-                <p class="font-[Manrope] text-[20px] font-semibold text-yellow-400"><?= $userScore['user_score'] ?></p>
+                <p class="font-[Manrope] text-[20px] font-semibold text-yellow-400"><?= $userObject->getScore() ?></p>
             </div>
 
             <div class=" w-full h-auto flex flex-col items-center">

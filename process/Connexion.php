@@ -3,6 +3,8 @@ require_once "../utils/autoloader.php";
 session_start();
 
 
+
+
 // control security input value
 if ($_SERVER['REQUEST_METHOD'] !== "POST") {
     header("location: ../public/connexion.php?error=bad_method");
@@ -32,45 +34,26 @@ if (strlen($_POST['input_pseudo']) < 3 || strlen($_POST['input_pseudo']) > 15) {
 // clean input
 $player = $_POST['input_pseudo'];
 
-$userObject = new User(username: $player);
+
 
 // connexion and query for bdd
 require_once '../utils/db_connect.php';
+$userRepo = new UserRepository($db, new UserMapper);
 
-$request = $db->prepare(
-    "SELECT
-                            *
-                       FROM 
-                            users
-                       WHERE user = :player"
-);
-
-$request->execute([
-    ":player" => $userObject->getUsername()
-]);
-
-$user = $request->fetch();
+$user = $userRepo->findOneByUsername($player);
 
 if ($user) {
-    $userObject->setId($user['id']);
-
-    $_SESSION['user'] = $userObject;
+    $_SESSION['user'] = $user;
 
     header("location: ../public/choice_quiz.php");
 
     exit;
 } else {
-    $request = $db->prepare(
-        "INSERT INTO users (user)
-     VALUES (:input_pseudo)"
-    );
+    $user = new User($player);
+    $user = $userRepo->insertOne($user);
 
-    $request->execute([
-        ":input_pseudo" => $userObject->getUsername()
-    ]);
 
-    $userObject->setId(id: $db->lastInsertId());
-    $_SESSION['user'] = $userObject;
+    $_SESSION['user'] = $user;
 
     header("location: ../public/choice_quiz.php");
     exit;
