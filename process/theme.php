@@ -25,24 +25,14 @@ $themeId = (int)$_GET['id'];
 // db connect
 try {
     require_once '../utils/db_connect.php';
+    $themeRepository =  new ThemeRepository ($db, new ThemeMapper);
 
-    // theme request
-    $request = $db->prepare(
-        'SELECT * FROM themes WHERE id = :themeId'
-    );
-    $request->execute([
-        'themeId' => $themeId
-    ]);
+    $theme = $themeRepository->findOneById($themeId);
 
-    $themeData = $request->fetch();
-
-    if (!$themeData) {
+    if (!$theme) {
         header("location: ../public/choice_quiz.php?error=unknown_theme");
         exit;
     }
-
-
-    $theme = new Theme(theme: $themeData['themes'], imgSmallSrc: $themeData['img_small_src'], imgLargeSrc: $themeData['img_large_src'], id: $themeData['id']);
 
 
     // question and answers reqyest and put in session

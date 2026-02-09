@@ -1,6 +1,8 @@
 <?php
+require_once "../utils/autoloader.php";
+
 session_start();
-require_once "../process/db_connect.php";
+require_once "../utils/db_connect.php";
 require_once "../utils/is_connected.php";
 require_once "../utils/is_quiz_started.php";
 
@@ -23,13 +25,19 @@ $requestPodium = $db->prepare(
 );
 
 $requestPodium->execute([
-    'id_theme' => $_SESSION['theme']['id']
+    'id_theme' => $_SESSION['theme']->getId()
 ]);
 
 $podiumPlayers = $requestPodium->fetchAll();
 
-// players rth to 10th query
+$podiumPlayersArray = [];
 
+foreach ($podiumPlayers as $podiumPlayer) {
+    $userPodium = new User($podiumPlayer['user']);
+    $podiumPlayersArray[] = new UserTheme(user: $userPodium, theme: $_SESSION['theme'], score: $podiumPlayer['user_score']);
+}
+
+// players 3th to 10th query
 $requestOthersPlayers = $db->prepare(
     'SELECT 
         u.user,
@@ -49,11 +57,20 @@ $requestOthersPlayers = $db->prepare(
 );
 
 $requestOthersPlayers->execute([
-    'id_theme' => $_SESSION['theme']['id']
+    'id_theme' => $_SESSION['theme']->getId()
 ]);
 
 $fourthToTenthPlayers = $requestOthersPlayers->fetchAll();
 
+$fourthToTenthPlayersArray = [];
+
+foreach ($fourthToTenthPlayers as $fourthToTenthPlayer) {
+    $userRanking = new User($fourthToTenthPlayer['user']);
+    $fourthToTenthPlayersArray[] = new UserTheme(user: $userRanking, theme: $_SESSION['theme'], score: $fourthToTenthPlayer['user_score']);
+}
+
+
+// page infos
 $title = "Accueil";
 $buttonLink = "choice_quiz.php";
 $ariaDescription = "Revenir aux quiz";
@@ -79,22 +96,22 @@ require_once "./partials/page_infos.php";
                 <div class="w-[80%] flex flex-row justify-between ">
                     <?php
                     // $player = $podiumPlayers[2]['user'];
-                    $player = isset($podiumPlayers[2]) ? $podiumPlayers[2]['user'] : 'Joueur';
-                    $scorePlayer = isset($podiumPlayers[2]) ? $podiumPlayers[2]['user_score'] : 'score';
+                    $player = isset($podiumPlayersArray[1]) ? $podiumPlayersArray[1]->getUser()->getUsername() : 'Joueur';
+                    $scorePlayer = isset($podiumPlayersArray[1]) ? $podiumPlayersArray[1]->getScore() : 'score';
                     $heightPodium = "h-12";
                     require "./partials/podium.php";
                     ?>
 
                     <?php
-                    $player = isset($podiumPlayers[0]) ? $podiumPlayers[0]['user'] : 'Joueur';
-                    $scorePlayer = isset($podiumPlayers[0]) ? $podiumPlayers[0]['user_score'] : 'Score';
+                    $player = isset($podiumPlayersArray[0]) ? $podiumPlayersArray[0]->getUser()->getUsername() : 'Joueur';
+                    $scorePlayer = isset($podiumPlayersArray[0]) ? $podiumPlayersArray[0]->getScore() : 'score';
                     $heightPodium = "h-20";
                     require "./partials/podium.php";
                     ?>
 
                     <?php
-                    $player = isset($podiumPlayers[1]) ? $podiumPlayers[1]['user'] : 'Joueur';
-                    $scorePlayer = isset($podiumPlayers[1]) ? $podiumPlayers[1]['user_score'] : 'Score';
+                    $player = isset($podiumPlayersArray[2]) ? $podiumPlayersArray[2]->getUser()->getUsername() : 'Joueur';
+                    $scorePlayer = isset($podiumPlayersArray[2]) ? $podiumPlayersArray[2]->getScore() : 'score';
                     $heightPodium = "h-16";
                     require "./partials/podium.php";
                     ?>
@@ -102,11 +119,11 @@ require_once "./partials/page_infos.php";
 
                 <div class="w-full h-auto flex flex-col gap-2">
                     <?php
-                    foreach ($fourthToTenthPlayers as $key => $player) {
+                    foreach ($fourthToTenthPlayersArray as $key => $fourthToTenthPlayerArray) {
                         $ariaLabelPosition = $key + 3 . "e position";
                         $position = $key + 3 . "e";
-                        $pseudo = isset($player['user']) ? $player['user'] : 'Joueur';
-                        $score = isset($player['user_score']) ? $player['user_score'] : 'Score';
+                        $player = $fourthToTenthPlayerArray->getUser()->getUsername();
+                        $scorePlayer = $fourthToTenthPlayerArray->getScore();
                         require "./partials/ranking.php";
                     }
                     ?>

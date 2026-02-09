@@ -3,9 +3,10 @@ require_once "../utils/autoloader.php";
 session_start();
 unset(
     $_SESSION['theme'],
-    $_SESSION['theme'],
+    $_SESSION['user_score'],
     $_SESSION['question_number'],
-    $_SESSION['score']
+    $_SESSION['score'],
+    $_SESSION['user-theme'],
 );
 
 require_once "../utils/is_connected.php";
@@ -16,21 +17,8 @@ require_once "./partials/page_infos.php";
 require_once "./partials/header.php";
 require_once "../utils/db_connect.php";
 
-// load all themes
-$request = $db->query(
-    'SELECT
-                            *
-                        from
-                            themes'
-);
+$themeRepository = new ThemeRepository($db, new ThemeMapper);
 
-$themes = $request->fetchAll();
-
-$themeObject = [];
-
-foreach ($themes as $theme) {
-    $themeObject[] = new Theme(theme: $theme['themes'], imgSmallSrc: $theme['img_small_src'], imgLargeSrc: $theme['img_large_src'], id: $theme['id']);
-}
 
 ?>
 
@@ -43,18 +31,20 @@ foreach ($themes as $theme) {
         <div class="w-full max-w-6xl mx-auto flex flex-col items-center gap-8 sm:w-full sm:flex-row sm:flex-wrap sm:justify-around ">
             <!-- container with 3 quiz cards links -->
             <?php
+            // load all themes
 
-            foreach ($themeObject as $theme) {
-                $imgQuiz = $theme->getImgSmallSrc();
-                $altMessage = "quiz sur les " . $theme->getTheme();
-                $quizName = $theme->getTheme();
-                $srcSet = $theme->getImgSmallSrc() .  " 600w, " . $theme->getImgLargeSrc() . " 1024w";
+            $themesDatas = $themeRepository->findAll();
+
+            foreach ($themesDatas as $themeData) {
+                $imgQuiz = $themeData->getImgSmallSrc();
+                $altMessage = "quiz sur les " . $themeData->getTheme();
+                $quizName = $themeData->getTheme();
+                $srcSet = $themeData->getImgSmallSrc() .  " 600w, " . $themeData->getImgLargeSrc() . " 1024w";
                 $sizes = "(max-width: 600px) 600px, 1024px";
-                $themeId = $theme->getId();
+                $themeId = $themeData->getId();
                 require "./partials/quiz_card.php";
             }
             ?>
-
         </div>
 </main>
 
