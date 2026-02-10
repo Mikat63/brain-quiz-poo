@@ -17,45 +17,13 @@ $userScoreObject = $userRepo->findOneByIdAndTheme($_SESSION['user'], $_SESSION['
 // Save score: INSERT if new, UPDATE if better
 if (!$userScoreObject) {
 
-    $insertUserScore = $userRepo->InsertScore($_SESSION['user'], $_SESSION['theme'], $_SESSION['score']);
-
-
-    } elseif ($_SESSION['score'] > $userScore['user_score']) {
-    $request = $db->prepare(
-        'UPDATE 
-                users_themes
-            SET
-                user_score = :score
-            WHERE 
-                id_user = :player_id AND id_theme = :theme_id'
-    );
-
-    $request->execute([
-        'score' => $_SESSION['score'],
-        'player_id' => $_SESSION['user']->getId(),
-        'theme_id' => $_SESSION['theme']->getId()
-    ]);
+    $userScoreObject = $userRepo->InsertScore($_SESSION['user'], $_SESSION['theme'], $_SESSION['score']);
 }
 
-// Re-fetch the score query for best score 
-$request = $db->prepare(
-    'SELECT 
-        user_score
-    FROM
-        users_themes
-    WHERE 
-        id_user = :player_id AND id_theme = :theme_id'
-);
+if ($_SESSION['score'] > $userScoreObject->getScore()) {
 
-$request->execute([
-    'player_id' => $_SESSION['user']->getId(),
-    'theme_id' => $_SESSION['theme']->getId()
-]);
-
-$userScore = $request->fetch();
-
-$userObject = new UserTheme(user: $_SESSION['user'], theme: $_SESSION['theme'], score: $userScore['user_score']);
-
+    $userScoreObject = $userRepo->UpdateOne($_SESSION['user'], $_SESSION['theme'], $_SESSION['score']);
+}
 ?>
 
 
@@ -67,7 +35,7 @@ $userObject = new UserTheme(user: $_SESSION['user'], theme: $_SESSION['theme'], 
         <div class="w-full h-auto flex flex-col gap-4 ">
             <div class=" w-full h-auto flex flex-col items-center">
                 <h2 class="font-[Manrope] text-[24px] font-bold text-white">MEILLEUR SCORE</h2>
-                <p class="font-[Manrope] text-[20px] font-semibold text-yellow-400"><?= $userObject->getScore() ?></p>
+                <p class="font-[Manrope] text-[20px] font-semibold text-yellow-400"><?= $userScoreObject->getScore() ?></p>
             </div>
 
             <div class=" w-full h-auto flex flex-col items-center">

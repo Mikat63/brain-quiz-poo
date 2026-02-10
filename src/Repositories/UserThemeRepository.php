@@ -4,6 +4,7 @@ final class UserThemeRepository
 {
     public function __construct(private PDO $db, private UserThemeMapper $mapper) {}
 
+    // find methods
     public function findPodiumByTheme(Theme $themeObject): array
     {
 
@@ -106,6 +107,7 @@ final class UserThemeRepository
         return $fourthToTenthPlayersObjectsArray;
     }
 
+    // insert method
     public function InsertScore(User $user, Theme $theme, int $score): ?UserTheme
     {
         $request = $this->db->prepare(
@@ -124,6 +126,28 @@ final class UserThemeRepository
             'score_user' => $score
         ]);
 
+        
+        return $this->findOneByIdAndTheme($user, $theme);
+    }
+
+    // update methods
+
+    public function UpdateOne(int $score, User $user, Theme $theme): ?UserTheme
+    {
+        $request = $this->db->prepare(
+            'UPDATE 
+                users_themes
+            SET
+                user_score = :score
+            WHERE 
+                id_user = :player_id AND id_theme = :theme_id'
+        );
+
+        $request->execute([
+            'score' => $score,
+            'player_id' => $user->getId(),
+            'theme_id' => $theme->getId()
+        ]);
 
         return $this->findOneByIdAndTheme($user, $theme);
     }
