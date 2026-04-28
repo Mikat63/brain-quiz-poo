@@ -3,14 +3,14 @@
 /* fonts import */
 @font-face {
   font-family: "Manrope";
-  src: url("fonts/Manrope/static/Manrope-Regular.woff2") format("woff2");
+  src: url("../fonts/Manrope/static/Manrope-Regular.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Inter";
-  src: url("fonts/Inter/static/Inter_18pt-Regular.woff2") format("woff2");
+  src: url("../fonts/Inter/static/Inter_18pt-Regular.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
 }

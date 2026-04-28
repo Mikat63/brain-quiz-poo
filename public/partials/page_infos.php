@@ -32,8 +32,8 @@
     </script>
 
     <!-- font meta -->
-    <link rel="preload" href="../assets/fonts/Manrope/static/Manrope-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="../assets/fonts/Inter/static/Inter_18pt-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="./assets/fonts/Manrope/static/Manrope-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="./assets/fonts/Inter/static/Inter_18pt-Regular.woff2" as="font" type="font/woff2" crossorigin>
 
     <!-- CSS & JS links -->
     <link rel="stylesheet" href="assets/styles/style.css">
