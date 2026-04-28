@@ -51,6 +51,8 @@ require_once './partials/page_infos.php';
                 ?>
             </div>
         </div>
+        <script defer src="./assets/scripts/main.js"></script>
+
 </main>
 
 <?php

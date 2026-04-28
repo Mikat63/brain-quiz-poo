@@ -37,7 +37,6 @@
 
     <!-- CSS & JS links -->
     <link rel="stylesheet" href="assets/styles/style.css">
-    <script defer src="./assets/scripts/main.js"></script>
     <title><?= "BRAIN QUIZ - $title" ?></title>
 
 
