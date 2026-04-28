@@ -6,7 +6,7 @@ const answersBtn = document.querySelectorAll(".answer_btn");
 
 // fetch ajax function
 function http_request(questionId, answerId) {
-  fetch("/brain-quiz-poo/process/next_question.php", {
+  fetch("brain_quiz/process/next_question.php", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -156,7 +156,7 @@ function timer(ts) {
         "duration-4000",
       );
 
-      fetch("/brain-quiz-poo/process/skip_question.php")
+      fetch("/brain_quiz/process/skip_question.php")
         .then((response) => response.json())
         .then((data) => showResulAnswer(data));
     }
